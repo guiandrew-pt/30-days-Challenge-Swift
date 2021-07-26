@@ -1,4 +1,4 @@
-// Mission Day 22 - The Necklace
+// Mission Day 22 - The Necklace - version 2
 func necklace(_ str1: String?, _ str2: String?) -> Bool? {
     if let word1 = str1, let word2 = str2 {
         // If the lenght of both words are different, then is false
@@ -11,21 +11,38 @@ func necklace(_ str1: String?, _ str2: String?) -> Bool? {
             return true
         }
         
-        var result = false
+        var resultOfTheWord1 = false
+        var resultOfTheWord2 = false
         
         // Will verify the first word, to check is will "necklace", and become equal to the second word
         for i in 1...word1.count {
-            let firstLetters = String(word1.prefix(i))
-            let wordWithoutFirstLetters = String(word1.suffix(word1.count - i))
-            let theWord = wordWithoutFirstLetters + firstLetters
+            let firstLettersFromWord1 = String(word1.prefix(i))
+            let word1WithoutFirstLetters = String(word1.suffix(word1.count - i))
+            let theWord = word1WithoutFirstLetters + firstLettersFromWord1
             
             if theWord == word2 {
-                result = true
+                resultOfTheWord1 = true
                 break
             }
         }
         
-        return result
+        // Will verify the second word, to check is will "necklace", and become equal to the first word
+        for i in 1...word2.count {
+            let firstLettersFromWord2 = String(word2.prefix(i))
+            let word2WithoutFirstLetters = String(word2.suffix(word2.count - i))
+            let theWord = word2WithoutFirstLetters + firstLettersFromWord2
+            
+            if theWord == word1 {
+                resultOfTheWord2 = true
+                break
+            }
+        }
+        
+        if resultOfTheWord1 && resultOfTheWord2 {
+            return true
+        } else {
+            return false
+        }
     }
     
     return nil
